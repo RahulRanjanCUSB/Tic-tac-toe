@@ -6,12 +6,35 @@ public class Cell {
     private CellState cellState;
     private Player player;
 
+    public Cell(int row, int col) {
+        this.row = row;
+        this.col = col;
+        this.cellState = CellState.EMPTY;
+    }
+
+
+    public Cell(int row, int col, Player player) {
+        this.row = row;
+        this.col = col;
+		this.player = player;
+        this.cellState = CellState.FILLED;
+    }
+
+    public void display(){
+        if(player == null) {
+            System.out.print("| |");
+        } else if(cellState.equals(CellState.BLOCKED)){
+            System.out.print("||||");
+        } else {
+            System.out.print("|"+player.getSymbol().getSymbolChar()+"|");
+        }
+    }
     public int getRow() {
         return row;
     }
 
-    public void setRow(int rows) {
-        this.row = rows;
+    public void setRow(int row) {
+        this.row = row;
     }
 
     public int getCol() {
@@ -38,27 +61,5 @@ public class Cell {
         this.player = player;
     }
 
-    public Cell(int rows, int col) {
-        this.row = rows;
-        this.col = col;
-        this.cellState = CellState.EMPTY;
-    }
 
-
-    public Cell(int rows, int col, Player player) {
-        this.row = rows;
-        this.col = col;
-        this.cellState = CellState.FILLED;
-        this.player = player;
-    }
-
-    public void display(){
-        if(player == null) {
-            System.out.print("| |");
-        } else if(cellState.equals(CellState.BLOCKED)){
-            System.out.print("||||");
-        } else {
-            System.out.print("|"+player.getSymbol().getSymbolChar()+"|");
-        }
-    }
 }

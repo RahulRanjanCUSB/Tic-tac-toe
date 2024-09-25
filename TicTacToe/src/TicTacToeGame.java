@@ -12,7 +12,7 @@ public class TicTacToeGame {
         Scanner sc = new Scanner(System.in);
         GameController gameController = new GameController();
 
-        System.out.println("Please enter the dimension fof the game");
+        System.out.println("Please enter the dimension of the game");
         int dimension = sc.nextInt();
 
         System.out.println("Will there be any bot in the game ? Y/N");
@@ -25,11 +25,12 @@ public class TicTacToeGame {
             iteratorNumber = dimension - 2;
         }
 
-        for(int i=0; i<iteratorNumber; i++){
-            System.out.println("What is the name of the player number: "+(i+1));
+        for(int i=0;i<iteratorNumber;i++){
+            //TODO : validate if no one passes a duplicate symbol
+            System.out.println("What is the name of the player number : " + (i+1));
             String playerName = sc.next();
 
-            System.out.println("What is the character symbol of the player number: "+(i+1));
+            System.out.println("What is the character symbol of the player number : " + (i+1));
             String characterSymbol = sc.next();
 
             players.add(new Player(new Symbol(characterSymbol.charAt(0)), playerName, PlayerType.HUMAN));
@@ -38,7 +39,7 @@ public class TicTacToeGame {
             System.out.println("What is the name of the BOT");
             String botName = sc.next();
 
-            System.out.println("What is the characted symbol of the BOT");
+            System.out.println("What is the character symbol of the BOT");
             String characterSymbol = sc.next();
 
             //TODO: take user input for bot difficulty level and create the object accrodingly
@@ -47,8 +48,8 @@ public class TicTacToeGame {
             Bot bot = new Bot(new Symbol(characterSymbol.charAt(0)),
                     botName,
                     difficultyLevel,
-                    BotPlayingStrategyFactory.getBotPlayingStrategyForDifficultyLevel(BotDifficultyLevel.EASY)
-                    );
+                    BotPlayingStrategyFactory.getBotPlayingStrategyForDifficultyLevel(BotDifficultyLevel.EASY));
+
             players.add(bot);
         }
         //Randomize the players in the list.
@@ -58,12 +59,11 @@ public class TicTacToeGame {
         int playerIndex = 0;
 
         while(game.getGameState().equals(GameState.IN_PROGRESS)){
-            System.out.println("Current board status.");
+            System.out.println("Current board status");
             gameController.displayBoard(game);
             playerIndex++;
             playerIndex = playerIndex % players.size();
-
-            Move movePlayed = gameController.executeMove(game, players.get(playerIndex-1));
+            Move movePlayed = gameController.executeMove(game, players.get(playerIndex));
             Player winner = gameController.checkWinner(game, movePlayed);
             if(winner != null){
                 gameController.displayBoard(game);

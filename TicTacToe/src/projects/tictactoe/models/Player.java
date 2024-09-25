@@ -11,6 +11,29 @@ public class Player {
     private Scanner scanner;
 
 
+
+    public Player(Symbol symbol, String name, PlayerType playerType) {
+        this.id = idCounter++;
+        this.symbol = symbol;
+        this.name = name;
+        this.playerType = playerType;
+        this.scanner = new Scanner(System.in);
+    }
+    public Move makeMove(Board board){
+        System.out.println(this.getName() + ", Please enter the row for the move" );
+        int row = scanner.nextInt();
+        System.out.println(this.getName() + ", Please enter the column for the move");
+        int col = scanner.nextInt();
+
+        //validate the move and throw the exception if required
+
+//        Cell cell = new Cell(row, col, this);
+//        Move move = new Move(cell, this);
+        board.getBoard().get(row).get(col).setPlayer(this);
+        board.getBoard().get(row).get(col).setCellState(CellState.FILLED);
+        return new Move(new Cell(row,col,this), this);
+    }
+
     public int getId() {
         return id;
     }
@@ -51,22 +74,5 @@ public class Player {
         this.scanner = scanner;
     }
 
-    public Move makeMove(Board board){
-        System.out.println("Please enter the row for the move");
-        int row = scanner.nextInt();
-        System.out.println("Please enter the column for the move");
-        int col = scanner.nextInt();
 
-        //validate the move and throw the exception if required
-
-        return new Move(new Cell(row, col, this), this);
-    }
-
-    public Player(Symbol symbol, String name, PlayerType playerType) {
-        this.id = idCounter++;
-        this.symbol = symbol;
-        this.name = name;
-        this.playerType = playerType;
-        this.scanner = new Scanner(System.in);
-    }
 }

@@ -15,7 +15,7 @@ public class Game {
     private Board board;
     private List<Move> moves;
     private Player winner;
-    private GameState gamestate;
+    private GameState gameState;
     private List<WinningStrategy> winningStrategies;
 
 
@@ -23,7 +23,7 @@ public class Game {
         this.players = players;
         this.board = board;
         this.moves = new ArrayList<Move>();
-        this.gamestate = GameState.IN_PROGRESS;
+        this.gameState = GameState.IN_PROGRESS;
         this.winningStrategies = winningStrategies;
     }
     public List<Player> getPlayers(){
@@ -40,7 +40,7 @@ public class Game {
     }
 
     public GameState getGameState(){
-        return gamestate;
+        return gameState;
     }
 
     public List<WinningStrategy> getWinningStrategies(){
@@ -129,8 +129,7 @@ public class Game {
             validateUniqueSymbolForAllPlayers();
         }
 
-        public Game build()
-        {
+        public Game build(){
             validate();
             return new Game(players, new Board(dimension), winningStrategies);
         }

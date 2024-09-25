@@ -10,16 +10,16 @@ import projects.tictactoe.strategies.winningStrategy.WinningStrategyFactory;
 import java.util.List;
 
 public class GameController {
-    public Game createGame(int dimension, List<Player> players)
-    {
+
+    public Game createGame(int dimension, List<Player> players){
         try{
-            return Game.builder().setDimension(dimension)
+            return Game.builder()
+                    .setDimension(dimension)
                     .setPlayers(players)
                     .setWinningStrategies(List.of(WinningStrategyFactory.getWinningStrategy(dimension)))
                     .build();
-        }
-        catch (Exception e){
-            System.out.println("Could not start the game");
+        }catch (Exception e){
+            System.out.println("Could not start the game, something went wrong");
         }
         return null;
     }
