@@ -1,17 +1,17 @@
 package projects.tictactoe.models;
 
 public class Cell {
-    private int rows;
+    private int row;
     private int col;
     private CellState cellState;
     private Player player;
 
-    public int getRows() {
-        return rows;
+    public int getRow() {
+        return row;
     }
 
-    public void setRows(int rows) {
-        this.rows = rows;
+    public void setRow(int rows) {
+        this.row = rows;
     }
 
     public int getCol() {
@@ -39,14 +39,14 @@ public class Cell {
     }
 
     public Cell(int rows, int col) {
-        this.rows = rows;
+        this.row = rows;
         this.col = col;
         this.cellState = CellState.EMPTY;
     }
 
 
     public Cell(int rows, int col, Player player) {
-        this.rows = rows;
+        this.row = rows;
         this.col = col;
         this.cellState = CellState.FILLED;
         this.player = player;

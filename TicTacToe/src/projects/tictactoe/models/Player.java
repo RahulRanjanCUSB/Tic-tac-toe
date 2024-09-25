@@ -3,18 +3,19 @@ package projects.tictactoe.models;
 import java.util.Scanner;
 
 public class Player {
-    private Long id;
+    private static int idCounter = 0;
+    private int id;
     private Symbol symbol;
     private String name;
     private PlayerType playerType;
     private Scanner scanner;
 
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -61,8 +62,8 @@ public class Player {
         return new Move(new Cell(row, col, this), this);
     }
 
-    public Player(Long id, Symbol symbol, String name, PlayerType playerType, Scanner scanner) {
-        this.id = id;
+    public Player(Symbol symbol, String name, PlayerType playerType) {
+        this.id = idCounter++;
         this.symbol = symbol;
         this.name = name;
         this.playerType = playerType;

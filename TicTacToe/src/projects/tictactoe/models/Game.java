@@ -4,6 +4,7 @@ import projects.tictactoe.exception.DuplicateSymbolException;
 import projects.tictactoe.exception.InvalidBotCountException;
 import projects.tictactoe.exception.InvalidDimensionException;
 import projects.tictactoe.exception.InvalidNumberOfPlayersException;
+import projects.tictactoe.strategies.winningStrategy.WinningStrategy;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -15,7 +16,6 @@ public class Game {
     private List<Move> moves;
     private Player winner;
     private GameState gamestate;
-    private int nextPlayerIndex;
     private List<WinningStrategy> winningStrategies;
 
 
@@ -24,36 +24,59 @@ public class Game {
         this.board = board;
         this.moves = new ArrayList<Move>();
         this.gamestate = GameState.IN_PROGRESS;
-        this.nextPlayerIndex = 0;
         this.winningStrategies = winningStrategies;
     }
+    public List<Player> getPlayers(){
+        return players;
+    }
+    public Board getBoard(){
+        return board;
+    }
+    public List<Move> getMoves(){
+        return moves;
+    }
+    public Player getWinner(){
+        return winner;
+    }
 
-    public static class Builder() {
+    public GameState getGameState(){
+        return gamestate;
+    }
+
+    public List<WinningStrategy> getWinningStrategies(){
+        return winningStrategies;
+    }
+
+    public static Builder builder(){
+        return new Builder();
+    }
+
+
+    public static class Builder {
         private List<Player> players;
         private List<WinningStrategy> winningStrategies;
         private int dimension;
 
-        public static Builder builder(){
-            return new Builder();
-        }
-
-
-        public void setPlayers(List<Player> players) {
-            this.players = players;
-        }
-
-        public void setWinningStrategies(List<WinningStrategy> winningStrategies) {
-            this.winningStrategies = winningStrategies;
-        }
-
-        public void setDimension(int dimension) {
-            this.dimension = dimension;
-        }
-
-        public Builder() {
+        private Builder(){
+            this.players = new ArrayList<Player>();
             this.winningStrategies = new ArrayList<WinningStrategy>();
             this.dimension = 0;
-            this.players = new ArrayList<Player>();
+        }
+
+
+        public Builder setPlayers(List<Player> players) {
+            this.players = players;
+            return this;
+        }
+
+        public Builder setWinningStrategies(List<WinningStrategy> winningStrategies) {
+            this.winningStrategies = winningStrategies;
+            return this;
+        }
+
+        public Builder setDimension(int dimension) {
+            this.dimension = dimension;
+            return this;
         }
 
         public void addPlayer(Player player) {
@@ -106,10 +129,10 @@ public class Game {
             validateUniqueSymbolForAllPlayers();
         }
 
-        private Game build()
+        public Game build()
         {
             validate();
-            return new Game(players, new Board(), winningStrategies);
+            return new Game(players, new Board(dimension), winningStrategies);
         }
     }
 }
