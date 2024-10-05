@@ -132,9 +132,10 @@ public class OrderOneWinningStrategy implements WinningStrategy {
                     symbol,
                     cornerSymbolCount.get(symbol)+1
             );
-            //Winning by same symbol in all column
-            if(cornerSymbolCount.get(symbol) == dimension)
-                return lastMove.getPlayer();
+            //Winning by same symbol in all corner
+            if(cornerSymbolCount.get(symbol) == 4){
+                System.out.println("Dimension: "+dimension);
+                return lastMove.getPlayer();}
         }
         return null;
     }

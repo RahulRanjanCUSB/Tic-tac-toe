@@ -14,14 +14,24 @@ public class TicTacToeGame {
 
         System.out.println("Please enter the dimension of the game");
         int dimension = sc.nextInt();
+        String isBotPresent= "";
+        while(true) {
+            System.out.println("Will there be any bot in the game ? Y/N");
+            isBotPresent = sc.next();
 
-        System.out.println("Will there be any bot in the game ? Y/N");
-        String isBotPresent = sc.next();
+            if((isBotPresent.equals("Y") || isBotPresent.equals("N") ||
+                isBotPresent.equals("y") || isBotPresent.equals("n"))){
+                break;
+            }
+            else{
+                System.out.println("You Entered " +isBotPresent + ", Which is wrong choice.");
+            }
+        }
 
         List<Player> players = new ArrayList<>();
         int iteratorNumber = dimension - 1;
 
-        if(isBotPresent.equals("Y")){
+        if(isBotPresent.equals("Y")||isBotPresent.equals("y")){
             iteratorNumber = dimension - 2;
         }
 
@@ -35,7 +45,7 @@ public class TicTacToeGame {
 
             players.add(new Player(new Symbol(characterSymbol.charAt(0)), playerName, PlayerType.HUMAN));
         }
-        if(isBotPresent.equals("Y")){
+        if(isBotPresent.equals("Y") || isBotPresent.equals("y")){
             System.out.println("What is the name of the BOT");
             String botName = sc.next();
 

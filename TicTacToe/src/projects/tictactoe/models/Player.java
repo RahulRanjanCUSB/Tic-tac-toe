@@ -10,8 +10,6 @@ public class Player {
     private PlayerType playerType;
     private Scanner scanner;
 
-
-
     public Player(Symbol symbol, String name, PlayerType playerType) {
         this.id = idCounter++;
         this.symbol = symbol;
@@ -20,10 +18,19 @@ public class Player {
         this.scanner = new Scanner(System.in);
     }
     public Move makeMove(Board board){
-        System.out.println(this.getName() + ", Please enter the row for the move" );
-        int row = scanner.nextInt();
-        System.out.println(this.getName() + ", Please enter the column for the move");
-        int col = scanner.nextInt();
+        int row, col;
+
+        while(true){
+            System.out.println(this.getName() + ", Please enter the row for the move" );
+            row = scanner.nextInt();
+            System.out.println(this.getName() + ", Please enter the column for the move");
+            col = scanner.nextInt();
+            if(board.getBoard().get(row).get(col).getCellState() == CellState.EMPTY) {
+                break;
+            }
+            System.out.println("Cell is already filled by " + board.getBoard().get(row).get(col).getPlayer().getName()+". Please enter a valid index");
+            board.printBoard();
+        }
 
         //validate the move and throw the exception if required
 
